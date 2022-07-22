@@ -92,7 +92,7 @@ class UserController {
             const result = await Users.deleteOne({_id: userId});
 
             if (result.deletedCount > 0) {
-                return res.json(user);
+                return res.json({message: 'user was deleted'});
             }
 
             throw {message: 'something going wrong'}
