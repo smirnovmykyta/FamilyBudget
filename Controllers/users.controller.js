@@ -8,22 +8,20 @@ import {KEY} from "../config.js";
 class UserController {
     async userCreate(req, res) {
         try {
-            const errors = validationResult(req)
+            const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).json({message: "Registration error", errors})
+                return res.status(400).json({message: "Registration error", errors});
             }
-            console.log(req.body);
             const {username, password} = req.body;
             const existingUser = await Users.findOne({username});
             if (existingUser) {
                 throw {message: 'this login is busy'};
             }
-            const hashPassword = crypto.pbkdf2Sync(password, KEY, 7, 16, 'sha512').toString('hex')
+            const hashPassword = crypto.pbkdf2Sync(password, KEY, 7, 16, 'sha512').toString('hex');
             const user = await Users.create({...req.body, password: hashPassword});
-            console.log(user)
             return res.json(user);
         } catch (err) {
-            console.log(err.message)
+            console.log(err.message);
             res.status(400).json({message: err.message});
         }
     }
