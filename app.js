@@ -5,7 +5,7 @@ import usersRouter from "./Routes/users.router.js";
 import bp from 'body-parser';
 
 
-dotenv.config()
+dotenv.config();
 
 const PORT = process.env.DB_PORT || 4000;
 const app = express();
