@@ -7,7 +7,10 @@ const userSchema = new mongoose.Schema({
     lastName: String,
     family: String,
     password: String,
-    email: String,
+    email: {
+        type: String,
+        match: /\S+@\S+\.\S+/
+    },
     photo: Buffer,
 });
 
